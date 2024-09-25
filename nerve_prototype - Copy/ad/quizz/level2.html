@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+
+    <link rel = "stylesheet" href = "./style.css" >
+    <title>Level 2 Quiz</title>
+    
+</head>
+<body>
+    <header>
+        <div class="logo">Level 2 Quiz</div>
+    </header>
+
+    <main>
+        <div class="quiz-container">
+            <h2>Answer all 10 questions correctly to earn a badge!</h2>
+            <div id="quiz"></div>
+            <button id="submit">Submit Answers</button>
+            <div id="result"></div>
+        </div>
+    </main>
+
+    <script>
+        const quizData = [
+        {
+                question: "You have been prescribed a new medication that contains a substance on the banned list. What is the best course of action?",
+                a: "Take the medication as prescribed and hope it won’t be detected in a test.",
+                b: "Consult with your doctor and apply for a Therapeutic Use Exemption (TUE).",
+                c: "Discontinue the medication without consulting your doctor.",
+                d: "Ask your coach if it’s safe to take the medication.",
+                correct: "b"
+            },
+            {
+                question: "What should an athlete do if they suspect that a competitor is using a banned substance?",
+                a: "Ignore the suspicion and focus on their own performance.",
+                b: "Report the suspicion to the appropriate authorities or anti-doping agency.",
+                c: "Confront the competitor and ask them to stop.",
+                d: "Discuss the suspicion with teammates and seek their opinion.",
+                correct: "b"
+            },
+            {
+                question: "Which of the following is considered a prohibited method under anti-doping regulations?",
+                a: "Using a banned substance that improves performance.",
+                b: "Receiving a therapeutic treatment for an illness.",
+                c: "Participating in regular drug testing.",
+                d: "Following a balanced diet to improve health.",
+                correct: "a"
+            },
+            {
+                question: "An athlete tests positive for a banned substance but claims it was due to contamination in a supplement. What is the likely outcome?",
+                a: "The athlete will be automatically exonerated.",
+                b: "The athlete may still face sanctions unless they can prove the contamination was unavoidable.",
+                c: "The athlete will receive a warning but no further action will be taken.",
+                d: "The athlete will be given a second chance without any penalties.",
+                correct: "b"
+            },
+            {
+                question: "Which of the following actions is NOT recommended when dealing with a banned substance in a medication?",
+                a: "Consulting with a medical professional about alternative treatments.",
+                b: "Using the medication without checking its banned status.",
+                c: "Applying for a Therapeutic Use Exemption (TUE) if necessary.",
+                d: "Informing your anti-doping organization about the situation.",
+                correct: "b"
+            },
+            {
+                question: "An athlete can be held responsible for taking a banned substance, even if they were unaware of its presence in their medication.",
+                a: "True",
+                b: "False",
+                correct: "a"
+            },
+            {
+                question: "Anti-doping rules apply to both in-competition and out-of-competition periods.",
+                a: "True",
+                b: "False",
+                correct: "a"
+            },
+            {
+                question: "An athlete is caught using a banned substance that was unknowingly included in a new supplement. The athlete has no previous history of doping. How should this case be handled?",
+                a: "The athlete should be immediately banned from competition.",
+                b: " The athlete should be given a reduced penalty if they can prove the substance was unknowingly used and report it.",
+                c : "The athlete should be suspended for a period of time regardless of the circumstances.",
+                d : "The athlete should receive no penalty if they did not intentionally use the banned substance.",
+                correct: "b"
+            },
+            {
+                question: "An athlete is considering using a new performance-enhancing supplement. They are unsure about its legality. What steps should the athlete take before making a decision?",
+                a: "Research the supplement online and decide based on reviews.",
+                b: "Consult with a sports nutritionist and check the supplement against the banned substance list.",
+                c: "Try the supplement for a short period and monitor its effects.",
+                d: "Ask friends or teammates who have used similar supplements for their opinion.",
+                correct: "b"
+            }
+    
+        ];
+
+        const quiz = document.getElementById('quiz');
+        const submitBtn = document.getElementById('submit');
+        const result = document.getElementById('result');
+        let userAnswers = [];
+
+        function loadQuiz() {
+        quiz.innerHTML = '';
+        quizData.forEach((data, index) => {
+            quiz.innerHTML += `
+                <div class="question">
+                    <h3>${data.question}</h3>
+                    <label><input type="radio" name="q${index}" value="a"> ${data.a}</label>
+                    <label><input type="radio" name="q${index}" value="b"> ${data.b}</label>
+                    ${data.c ? `<label><input type="radio" name="q${index}" value="c"> ${data.c}</label>` : ''}
+                    ${data.d ? `<label><input type="radio" name="q${index}" value="d"> ${data.d}</label>` : ''}
+                </div>
+            `;
+        });
+    }
+
+        submitBtn.addEventListener('click', () => {
+            userAnswers = [];
+            quizData.forEach((data, index) => {
+                const answer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (answer) {
+                    userAnswers.push(answer.value);
+                }
+            });
+
+            if (userAnswers.length !== quizData.length) {
+                result.innerText = 'Please answer all questions!';
+                return;
+            }
+
+            const correctAnswers = userAnswers.filter((answer, index) => answer === quizData[index].correct);
+            if (correctAnswers.length === quizData.length) {
+                result.innerText = 'Congratulations! You answered all questions correctly and earned a "Ethical Athlete 🥈" badge!';
+            } else {
+                result.innerText = `You answered ${correctAnswers.length} out of ${quizData.length} questions correctly. Try again!`;
+            }
+        });
+
+        loadQuiz();
+    </script>
+</body>
+</html>

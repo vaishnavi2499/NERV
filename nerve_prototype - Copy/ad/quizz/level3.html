@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "./style.css" >
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+
+    <title>Level 3 Quiz</title>
+    
+</head>
+<body>
+    <header>
+        <div class="logo">Level 3 Quiz</div>
+    </header>
+
+    <main>
+        <div class="quiz-container">
+            <h2>Answer all 10 questions correctly to earn a badge!</h2>
+            <div id="quiz"></div>
+            <button id="submit">Submit Answers</button>
+            <div id="result"></div>
+        </div>
+    </main>
+
+    <script>
+        const quizData = [
+        {
+                question: "You are an athlete's coach, and a promising athlete confides in you that they have been offered a banned substance by a sponsor. What is your best course of action?",
+                a: "Advise the athlete to accept the offer to enhance performance and ignore potential consequences.",
+                b: "Discuss the ethical implications with the athlete and report the incident to the appropriate authorities.",
+                c: "Encourage the athlete to use the substance secretly and focus on winning.",
+                d: "Suggest the athlete use the banned substance but keep it confidential.",
+                correct: "b"
+            },
+            {
+                question: "An athlete is caught using a banned substance but claims it was due to a medical emergency where no other options were available. What should the review process focus on?",
+                a: "Immediate suspension of the athlete without further investigation.",
+                b: "Determining whether the athlete's claim is valid and if the use of the substance was truly unavoidable.",
+                c: "Giving the athlete a warning and allowing them to continue competing.",
+                d: "Reviewing only the athlete's past performance and ignoring the current case.",
+                correct: "b"
+            },
+            {
+                question: "You are tasked with creating an anti-doping workshop for athletes. Which approach would be most effective in ensuring comprehensive understanding?",
+                a: "Provide a lecture with detailed information about anti-doping rules.",
+                b: "Organize interactive sessions including role-playing, case studies, and discussions about real-life scenarios.",
+                c: "Distribute printed materials about anti-doping regulations and ask athletes to read them.",
+                d: "Show a video about anti-doping rules and answer questions at the end.",
+                correct: "b"
+            },
+            {
+                question: "An athlete tests positive for a substance that is on the banned list but is known to be present in many common over-the-counter medications. What should be the primary concern?",
+                a: "Immediate public disclosure of the athlete’s positive test result.",
+                b: "Investigating whether the athlete took all reasonable precautions to avoid contamination.",
+                c: "Assuming the athlete is guilty without further investigation.",
+                d: "Ignoring the case if the substance is common in medications.",
+                correct: "b"
+            },
+            {
+                question: "As a sports administrator, you receive reports of widespread use of a banned substance among athletes. What is the most appropriate action to take?",
+                a: "Conduct a thorough investigation and review the effectiveness of current anti-doping education programs.",
+                b: "Increase the frequency of drug testing without addressing the root cause.",
+                c: "Penalize individual athletes without further investigation.",
+                d: "Ignore the reports and continue with the current anti-doping policies.",
+                correct: "a"
+            },
+            {
+                question: "Athletes who unintentionally use banned substances due to contamination are always exonerated if they can prove their innocence.",
+                a: "True",
+                b: "False",
+                correct: "b"
+            },
+            {
+                question: "An athlete's history of compliance with anti-doping rules can influence the sanctions imposed for a current infraction.",
+                a: "True",
+                b: "False",
+                correct: "a"
+            },
+            {
+                question: "Scenario: An athlete receives a banned substance from a trusted medical professional who assures them it is safe. The athlete later tests positive for the substance. How should this situation be handled?",
+                a: "The athlete should be suspended without investigation.",
+                b: "The situation should be thoroughly investigated to determine the responsibility of the medical professional and the athlete’s role.",
+                c : "The athlete should be exonerated because they trusted a medical professional.",
+                d : "The athlete should be given a warning and allowed to continue competing.",
+                correct: "b"
+            },
+            {
+                question: " Scenario: You are part of an anti-doping review board, and an athlete presents evidence of contamination from a supplement. How should you proceed?",
+                a: "Accept the evidence and clear the athlete of any wrongdoing without further review.",
+                b: " Conduct a detailed investigation into the contamination claim and evaluate the athlete’s level of due diligence.",
+                c: "Suspend the athlete while disregarding their evidence of contamination.",
+                d: "Assume the athlete is guilty based on the positive test result.",
+                correct: "b"
+            },
+            {
+                question: "Case Study: An athlete's positive test result for a banned substance is contested based on the argument that the substance was unintentionally consumed through a supplement. The athlete has a history of compliance with anti-doping regulations. How should the case be resolved?",
+                a: "The athlete should receive a reduced penalty due to their history of compliance and the unintentional nature of the infraction.",
+                b: "The athlete should be given a full suspension regardless of their history or the nature of the infraction.",
+                c: "The case should be dismissed without considering the athlete’s history.",
+                d: "The athlete should be cleared of any penalty as long as they provide evidence of contamination.",
+                correct: "a"
+            },
+            {
+                question: "Case Study: As a sports administrator, you discover that several athletes are using a banned substance due to misinformation about its legality. What measures should you take to address this issue?",
+                a: "Increase drug testing frequencies without changing educational approaches.",
+                b: "Implement a comprehensive educational campaign to correct misinformation and ensure athletes are aware of banned substances.",
+                c: "Penalize the athletes involved without addressing the root cause.",
+                d: "Ignore the issue and focus on individual cases of doping violations.",
+                correct: "b"
+            }
+    
+        ];
+
+        const quiz = document.getElementById('quiz');
+        const submitBtn = document.getElementById('submit');
+        const result = document.getElementById('result');
+        let userAnswers = [];
+
+        function loadQuiz() {
+        quiz.innerHTML = '';
+        quizData.forEach((data, index) => {
+            quiz.innerHTML += `
+                <div class="question">
+                    <h3>${data.question}</h3>
+                    <label><input type="radio" name="q${index}" value="a"> ${data.a}</label>
+                    <label><input type="radio" name="q${index}" value="b"> ${data.b}</label>
+                    ${data.c ? `<label><input type="radio" name="q${index}" value="c"> ${data.c}</label>` : ''}
+                    ${data.d ? `<label><input type="radio" name="q${index}" value="d"> ${data.d}</label>` : ''}
+                </div>
+            `;
+        });
+    }
+
+        submitBtn.addEventListener('click', () => {
+            userAnswers = [];
+            quizData.forEach((data, index) => {
+                const answer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (answer) {
+                    userAnswers.push(answer.value);
+                }
+            });
+
+            if (userAnswers.length !== quizData.length) {
+                result.innerText = 'Please answer all questions!';
+                return;
+            }
+
+            const correctAnswers = userAnswers.filter((answer, index) => answer === quizData[index].correct);
+            if (correctAnswers.length === quizData.length) {
+                result.innerText = 'Congratulations! You answered all questions correctly and earned a "Anti-Doping Advocate 🥇" badge!';
+            } else {
+                result.innerText = `You answered ${correctAnswers.length} out of ${quizData.length} questions correctly. Try again!`;
+            }
+        });
+
+        loadQuiz();
+    </script>
+</body>
+</html>

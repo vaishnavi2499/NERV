@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+
+    <title>Level 1 Quiz</title>
+    
+</head>
+<body>
+    <header>
+        <div class="logo">Level 1 Quiz</div>
+    </header>
+
+    <main>
+        <div class="quiz-container">
+            <h2>Answer all 10 questions correctly to earn a badge!</h2>
+            <div id="quiz"></div>
+            <button id="submit">Submit Answers</button>
+            <div id="result"></div>
+        </div>
+    </main>
+
+    <script>
+        const quizData = [
+            {
+                question: "Which of the following is a banned substance in sports?",
+                a: "Water",
+                b: "Anabolic Steroids",
+                c: "Vitamin D",
+                d: "Caffeine",
+                correct: "b"
+            },
+            {
+                question: "What is the primary goal of anti-doping regulations?",
+                a: "To reduce the cost of sports events",
+                b: " To protect athletes' health and ensure fair competition",
+                c: "To increase the popularity of sports",
+                d: "To promote the use of performance-enhancing drugs",
+                correct: "b"
+            },
+            {
+                question: "Which organization is responsible for enforcing anti-doping rules in India??",
+                a: "International Olympic Committee (IOC)",
+                b: "World Anti-Doping Agency (WADA)",
+                c: "National Anti-Doping Agency (NADA)",
+                d: "Sports Authority of India (SAI)",
+                correct: "c"
+            },
+            {
+                question: "Scenario: You are an athlete and have been prescribed a medication for allergies. What should you do before taking it?",
+                a: "Take it without checking, as medications are safe",
+                b: " Check if it contains any banned substances and consult with your coach or a medical professional.",
+                c: " Ask a teammate if it’s safe to use",
+                d: "Only take medications during the off-season",
+                correct: "b"
+            },
+            {
+                question: "All athletes are subject to doping tests, regardless of their sport.",
+                a: "True",
+                b: "False",
+                correct: "a"
+            },
+            {
+                question: "An athlete can be banned from their sport if they test positive for a banned substance, even if they were unaware it was banned.",
+                a: "True",
+                b: "False",
+                correct: "a"
+            },
+            {
+                question: "An athlete must apply for a __________ to use a prohibited substance for medical reasons.",
+                a: "Therapeutic Use Exemption (TUE)",
+                b: "Special Drug Permission (SDP)",
+                c : "Medical Waiver Certificate (MWC)",
+                d : "Authorized Substance Use (ASU)",
+                correct: "a"
+            },
+            {
+                question: "Scenario: You are offered a new energy drink that claims to boost performance. How do you determine if it’s safe to consume?",
+                a: "Trust the advertisement and take it.",
+                b: " Research the ingredients and check with a sports nutritionist or anti-doping expert.",
+                c: "Ask your friends if they’ve tried it.",
+                d: "Mix it with water to dilute any potential risks.",
+                correct: "b"
+            }
+    
+        ];
+
+        const quiz = document.getElementById('quiz');
+        const submitBtn = document.getElementById('submit');
+        const result = document.getElementById('result');
+        let userAnswers = [];
+
+        function loadQuiz() {
+        quiz.innerHTML = '';
+        quizData.forEach((data, index) => {
+            quiz.innerHTML += `
+                <div class="question">
+                    <h3>${data.question}</h3>
+                    <label><input type="radio" name="q${index}" value="a"> ${data.a}</label>
+                    <label><input type="radio" name="q${index}" value="b"> ${data.b}</label>
+                    ${data.c ? `<label><input type="radio" name="q${index}" value="c"> ${data.c}</label>` : ''}
+                    ${data.d ? `<label><input type="radio" name="q${index}" value="d"> ${data.d}</label>` : ''}
+                </div>
+            `;
+        });
+    }
+
+        submitBtn.addEventListener('click', () => {
+            userAnswers = [];
+            quizData.forEach((data, index) => {
+                const answer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (answer) {
+                    userAnswers.push(answer.value);
+                }
+            });
+
+            if (userAnswers.length !== quizData.length) {
+                result.innerText = 'Please answer all questions!';
+                return;
+            }
+
+            const correctAnswers = userAnswers.filter((answer, index) => answer === quizData[index].correct);
+            if (correctAnswers.length === quizData.length) {
+                result.innerText = 'Congratulations! You answered all questions correctly and earned a "Anti-Doping Beginner 🥉" badge!';
+            } else {
+                result.innerText = `You answered ${correctAnswers.length} out of ${quizData.length} questions correctly. Try again!`;
+            }
+        });
+
+        loadQuiz();
+    </script>
+</body>
+</html>

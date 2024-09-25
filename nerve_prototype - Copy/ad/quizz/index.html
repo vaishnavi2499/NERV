@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Quiz Levels</title>
+    <style>
+        body {
+            font-family: "Poppins", sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #3cb37177;
+            overflow-x: hidden; /* Prevent horizontal scrolling */
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            background-color: seagreen;
+            color: #fff;
+            position: relative;
+            z-index: 1000; /* Ensure header stays on top */
+        }
+
+        .logo-comp {
+            display: flex;
+            align-items: center;
+            gap: 10px; /* Adjust spacing between logo and text */
+        }
+
+        .logo-comp > div {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: MediumSpringGreen;
+            box-shadow: 0 5px 15px 0 SeaGreen, inset 0px -6px 12px 0px SeaGreen;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .logo-comp > div > svg {
+            fill: white;
+            width: 70%;
+            height: 70%;
+            filter: drop-shadow(1px 1px 0px SeaGreen);
+            transition: all 0.4s ease-in-out;
+        }
+
+        .logo-comp p {
+            letter-spacing: 3px;
+            font-size: 16pt;
+            margin: 0;
+            padding: 0;
+            color: SeaGreen;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .logo-comp:hover > p {
+            color: black;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .logo-comp:hover > div > svg {
+            fill: black;
+            filter: unset;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 50px; 
+            font-weight: bold; 
+            margin: 0;
+        }
+
+        nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        nav a {
+            font-size: 20px;
+            color: #fff;
+            text-decoration: none;
+            padding: 10px 15px;
+            background-color: #555;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: normal; /* Ensure links are not bold */
+        }
+
+        nav a:hover {
+            background-color: #777;
+        }
+
+        .quiz-levels {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px; /* Add padding for better spacing */
+        }
+
+        .quiz-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+            
+            padding: 20px;
+        }
+
+        .medal-icon {
+            font-size: 2em;
+            margin-right: 20px;
+        }
+
+        .section-content {
+            flex: 1;
+            text-align: left;
+        }
+
+        .section-content h2 {
+            margin-top: 0;
+        }
+
+        .section-content p {
+            margin: 10px 0;
+        }
+
+        .quiz-levels a {
+            font-size: 1.2em;
+            color: #333;
+            text-decoration: none;
+            padding: 10px;
+            background-color: white;
+            border: 2px solid seagreen;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .quiz-levels a:hover {
+            background-color: seagreen;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo-comp">
+            <div><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M400 0c-26.5 0-48 21.5-48 48s21.5 48 48 48 48-21.5 48-48-21.5-48-48-48zm0 448c-8.8 0-16 7.2-16 16s-7.2 16-16 16h-96c-8.8 0-16 7.2-16 16s7.2 16 16 16h96c26.5 0 48-21.5 48-48 0-8.8-7.2-16-16-16zm-282.2 8.6c-6.2 6.2-16.4 6.3-22.6 0l-67.9-67.9c-6.2-6.2-16.4-6.2-22.6 0s-6.2 16.4 0 22.6l67.9 67.9c9.4 9.4 21.7 14 34 14s24.6-4.7 33.9-14c6.2-6.2 6.2-16.4 0-22.6s-16.4-6.3-22.7 0zm56.1-179.8l-93.7 93.7c-12.5 12.5-12.5 32.8 0 45.2 6.2 6.2 14.4 9.4 22.6 9.4s16.4-3.1 22.6-9.4l91.9-91.9-30.2-30.2c-5-5-9.4-10.7-13.2-16.8zM128 160h105.5l-20.1 17.2c-13.5 11.5-21.6 28.4-22.3 46.1-.7 17.8 6.1 35.2 18.7 47.7l78.2 78.2V432c0 17.7 14.3 32 32 32s32-14.3 32-32v-89.4c0-12.6-5.1-25-14.1-33.9l-61-61c.5-.4 1.2-.6 1.7-1.1l82.3-82.3c11.5-11.5 14.9-28.6 8.7-43.6-6.2-15-20.7-24.7-37-24.7H128c-17.7 0-32 14.3-32 32s14.3 32 32 32z"/></svg></div>
+            <p>NERV</p>
+        </div>
+        <h1 class="header-title">QUIZZ</h1>
+        <nav>
+            <a href="#">Leaderboard</a>
+            <a href="/ad/sign-in-and-sign-up-form-template/index.html">Sign up</a>
+        </nav>
+    </header>
+
+    <div class="quiz-levels">
+        <div class="quiz-section">
+            <div class="medal-icon">🥉</div>
+            <div class="section-content">
+                <h2>Anti-Doping Beginner</h2>
+                <p>Level 1 serves as the foundation for understanding the basics of anti-doping. This level is designed for individuals who are new to the concept of anti-doping, such as young athletes, beginners in sports, or those unfamiliar with the regulations. The focus is on introducing key terms, the importance of clean sport, and the basic rules regarding banned substances and practices. It aims to build awareness and promote a culture of fair play.</p>
+            </div>
+            <a href="./level1.html">Start Quiz</a>
+        </div>
+
+        <div class="quiz-section">
+            <div class="medal-icon">🥈</div>
+            <div class="section-content">
+                <h2>Ethical Athlete</h2>
+                <p>Level 2 delves deeper into the rules and regulations surrounding anti-doping practices. This level is aimed at athletes, coaches, and support staff who need a more detailed understanding of anti-doping regulations, including the procedures for drug testing and the consequences of violations. The content covers the roles and responsibilities of athletes, the therapeutic use exemptions (TUE), and the testing process.</p>
+            </div>
+            <a href="./level2.html">Start Quiz</a>
+        </div>
+
+        <div class="quiz-section">
+            <div class="medal-icon">🥇</div>
+            <div class="section-content">
+                <h2>Anti-Doping Advocate</h2>
+                <p>Level 3 is designed for those who already have a solid understanding of anti-doping regulations and are looking to deepen their knowledge. This level focuses on advanced topics such as the use of biological passports, emerging doping methods, and the scientific aspects of detecting banned substances. It is suitable for experienced athletes, coaches, medical professionals, and anti-doping officers.</p>
+            </div>
+            <a href="./level3.html">Start Quiz</a>
+        </div>
+
+        <div class="quiz-section">
+            <div class="medal-icon">🏆</div>
+            <div class="section-content">
+                <h2>Clean Sport Ambassador</h2>
+                <p>Level 4 is the expert level, designed for professionals involved in anti-doping policy-making, legal advisors, and senior sports officials. This level focuses on the strategic management of anti-doping programs, including policy development, international cooperation, and addressing complex doping cases. Participants will engage in case studies, scenario analysis, and strategic planning exercises to tackle high-level challenges in anti-doping enforcement.</p>
+            </div>
+            <a href="./level4.html">Start Quiz</a>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

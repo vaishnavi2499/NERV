@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet"><link rel="stylesheet" href="./style.css">
+
+    <link rel = "stylesheet" href = "./style.css" >
+    <title>Level 4 Quiz</title>
+    
+</head>
+<body>
+    <header>
+        <div class="logo">Level 4 Quiz</div>
+    </header>
+
+    <main>
+        <div class="quiz-container">
+            <h2>Answer all 10 questions correctly to earn a badge!</h2>
+            <div id="quiz"></div>
+            <button id="submit">Submit Answers</button>
+            <div id="result"></div>
+        </div>
+    </main>
+
+    <script>
+        const quizData = [
+        {
+                question: "As an anti-doping policy advisor, you are tasked with revising anti-doping regulations to address emerging substances and methods. Which strategy should you prioritize to effectively manage these challenges?",
+                a: "Focus solely on increasing the frequency of drug testing.",
+                b: "Collaborate with international organizations to update regulations and testing methods continuously.",
+                c: "Implement a blanket ban on all substances without regard to their specific effects.",
+                d: "Rely on existing regulations and ignore new developments in doping methods.",
+                correct: "b"
+            },
+            {
+                question: "In an advanced anti-doping program, how can you ensure that athletes from diverse linguistic and cultural backgrounds fully understand and comply with anti-doping regulations?",
+                a: "Provide a single language translation of anti-doping materials.",
+                b: "Implement a global anti-doping education campaign with region-specific content and cultural adaptations.",
+                c: "Focus only on high-profile athletes and assume they will relay information to others.",
+                d: "Use generic educational materials without considering cultural differences.",
+                correct: "b"
+            },
+            {
+                question: "An athlete has been involved in a sophisticated doping scheme using cutting-edge technology. How should the investigation approach be adjusted to address the complexity of the case?",
+                a: "Focus on traditional testing methods and ignore technological aspects.",
+                b: "Collaborate with technology experts and forensic specialists to understand the sophisticated methods used.",
+                c: "Apply standard anti-doping procedures without adapting to the new technology.",
+                d: "Disregard the technological aspect and focus only on the athlete’s testimony.",
+                correct: "b"
+            },
+            {
+                question: "When developing an anti-doping strategy for a national sports federation, which factor should be given the highest priority to ensure effectiveness and compliance?",
+                a: "Increasing the budget for drug testing without any changes to educational programs.",
+                b: "Creating a comprehensive and integrated approach that includes education, testing, and support for athletes.",
+                c: "Emphasizing punitive measures over educational initiatives.",
+                d: "Focusing exclusively on international competition and neglecting domestic programs.",
+                correct: "b"
+            },
+            {
+                question: "A new performance-enhancing substance is discovered but not yet included in the banned list. How should the anti-doping organization respond to this situation?",
+                a: "Wait until the substance is officially banned before taking any action.",
+                b: "Temporarily include the substance on a provisional list and inform stakeholders while conducting further research.",
+                c: "Ignore the substance until there is definitive evidence of its misuse.",
+                d: "Add the substance to the banned list immediately without further investigation.",
+                correct: "b"
+            },
+           
+            {
+                question: "True or False: Comprehensive anti-doping strategies should include not only testing but also preventive measures and educational programs tailored to different regions and cultures.",
+                a: "True",
+                b: "False",
+                correct: "a"
+            },
+            {
+                question: "True or False: The effectiveness of an anti-doping policy can be accurately measured only by the number of positive tests reported.",
+                a: "True",
+                b: "False",
+                correct: "b"
+            },
+            {
+                question: "True or False: When dealing with advanced doping technologies, it is crucial to stay updated with the latest scientific research and technological developments.",
+                a: "True",
+                b: "False",
+                correct: "a"
+            },
+            {
+                question: "True or False: Anti-doping regulations should remain static and not be frequently updated to maintain consistency.",
+                a: "True",
+                b: "False",
+                correct: "b"
+            },
+            {
+                question: "True or False: The ethical implications of anti-doping decisions should always be considered alongside the enforcement of regulations and penalties.",
+                a: "True",
+                b: "False",
+                correct: "a"
+            },
+          
+            {
+                question: "To effectively address new doping methods, anti-doping organizations must collaborate with __________ and technology experts.",
+                a: "Legal advisors",
+                b: " Media specialists",
+                c: "Forensic specialists",
+                d: "Financial auditors",
+                correct: "c"
+            },
+            {
+                question: "A comprehensive anti-doping strategy should integrate __________, testing, and support systems for athletes.",
+                a: "Legal enforcement",
+                b: " Public relations",
+                c: " Education",
+                d: "Event management",
+                correct: "c"
+            },
+            {
+                question: "When a new performance-enhancing substance is identified, it should initially be placed on a __________ list while further research is conducted.",
+                a: "Restricted",
+                b: "Provisional",
+                c: "Banned",
+                d: "Experimental",
+                correct: "b"
+            },
+            {
+                question: "Effective anti-doping education programs must be tailored to accommodate __________ and cultural differences among athletes.",
+                a: "Linguistic",
+                b: "Financial",
+                c: "Technological",
+                d: "Administrative",
+                correct: "a"
+            },
+            {
+                question: "Anti-doping regulations need to be continuously updated to address emerging __________ and methods.",
+                a: "Techniques",
+                b: "Substances",
+                c: "Policies",
+                d: "Participants",
+                correct: "b"
+            },
+           
+            {
+                question: "Scenario: You are leading an international anti-doping conference, and there is a proposal to include a new class of substances in the banned list. What is the most prudent approach to make an informed decision?",
+                a: "Approve the inclusion immediately based on initial research.",
+                b: "Conduct a thorough review including scientific studies, stakeholder opinions, and potential impacts before making a decision.",
+                c: "Delay the decision until more data is available, ignoring the immediate concerns.",
+                d: "Include the substances on a provisional list without any further review.",
+                correct: "b"
+            },
+            {
+                question: "Scenario: An anti-doping organization is facing challenges in implementing its education program effectively across diverse regions with varying technological access. How should the organization address this issue?",
+                a: "Provide the same educational content in a single format and assume it will be effective everywhere.",
+                b: "Develop a multi-platform education program with region-specific adaptations and support for varying levels of technology access.",
+                c: "Focus only on high-tech solutions and ignore areas with limited access.",
+                d: "Centralize the program and limit it to only major urban centers.",
+                correct: "b"
+            },
+           
+            {
+                question: "Case Study: An anti-doping organization is revising its strategy due to an increase in doping incidents despite existing measures. How should the organization approach this revision?",
+                a: "Increase the budget for drug testing alone without changing other aspects.",
+                b: "Conduct a comprehensive review of current policies, assess their effectiveness, and incorporate feedback from athletes and stakeholders to develop an improved, integrated strategy.",
+                c: "Implement more stringent penalties and ignore educational and preventive measures.",
+                d: "Maintain the current strategy and focus only on improving testing procedures.",
+                correct: "b"
+            },
+            {
+                question: "Case Study: An athlete is found using an innovative new method to evade detection of banned substances. How should the anti-doping community respond to this challenge?",
+                a: "Ignore the method until it becomes more widespread.",
+                b: "Invest in research and development to understand and counteract the new evasion method, while updating detection technologies and protocols.",
+                c: "Focus only on penalizing the athlete involved without addressing the broader issue.",
+                d: "Apply the current detection methods and hope they will suffice.",
+                correct: "b"
+            }
+        ];
+
+        const quiz = document.getElementById('quiz');
+        const submitBtn = document.getElementById('submit');
+        const result = document.getElementById('result');
+        let userAnswers = [];
+
+        function loadQuiz() {
+        quiz.innerHTML = '';
+        quizData.forEach((data, index) => {
+            quiz.innerHTML += `
+                <div class="question">
+                    <h3>${data.question}</h3>
+                    <label><input type="radio" name="q${index}" value="a"> ${data.a}</label>
+                    <label><input type="radio" name="q${index}" value="b"> ${data.b}</label>
+                    ${data.c ? `<label><input type="radio" name="q${index}" value="c"> ${data.c}</label>` : ''}
+                    ${data.d ? `<label><input type="radio" name="q${index}" value="d"> ${data.d}</label>` : ''}
+                </div>
+            `;
+        });
+    }
+
+        submitBtn.addEventListener('click', () => {
+            userAnswers = [];
+            quizData.forEach((data, index) => {
+                const answer = document.querySelector(`input[name="q${index}"]:checked`);
+                if (answer) {
+                    userAnswers.push(answer.value);
+                }
+            });
+
+            if (userAnswers.length !== quizData.length) {
+                result.innerText = 'Please answer all questions!';
+                return;
+            }
+
+            const correctAnswers = userAnswers.filter((answer, index) => answer === quizData[index].correct);
+            if (correctAnswers.length === quizData.length) {
+                result.innerText = 'Congratulations! You answered all questions correctly and earned a "Clean Sport Ambassador 🏆" badge!';
+            } else {
+                result.innerText = `You answered ${correctAnswers.length} out of ${quizData.length} questions correctly. Try again!`;
+            }
+        });
+
+        loadQuiz();
+    </script>
+</body>
+</html>
